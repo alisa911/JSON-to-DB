@@ -20,6 +20,7 @@ public class ContractService {
     }
 
     public Contract save(Contract contract) {
+
         return contractRepository.save(contract);
     }
 

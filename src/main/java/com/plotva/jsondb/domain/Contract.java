@@ -2,6 +2,8 @@ package com.plotva.jsondb.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,8 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Contract {
     @Id

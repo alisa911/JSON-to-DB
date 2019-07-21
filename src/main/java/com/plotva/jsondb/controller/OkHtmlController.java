@@ -13,7 +13,7 @@ public class OkHtmlController {
 
     OkHttpClient client = new OkHttpClient();
 
-    public String run(HttpUrl url) throws IOException {
+    public String run(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();

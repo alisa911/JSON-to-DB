@@ -1,91 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>JSON-to-DB</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
 </head>
 <body>
-<h1>Add URL:</h1>
-<form th:action="@{/create}" method="POST">
-    URL:
-    <input type="text" name="url" />
-    <br/>
-    <input type="submit" value="Add" />
-</form>
+<h1>JSON-to-DB</h1>
 <br/>
-<h2>Contract</h2>
-<div>
-    <table border="1">
-        <tr>
-            <th>PK</th>
-            <th>Hash</th>
-            <th>Language</th>
-            <th>Description</th>
-            <th>Format</th>
-            <th>Url</th>
-            <th>Title</th>
-            <th>DocumentOf</th>
-            <th>DatePublished</th>
-            <th>DocumentType</th>
-            <th>DateModified</th>
-            <th>RelatedItem</th>
-            <th>Id</th>
-        </tr>
-        <tr th:each ="contract : ${}">
-            <td th:utext="${contract.pk}">...</td>
-            <td th:utext="${contract.hash}">...</td>
-            <td th:utext="${contract.language}">...</td>
-            <td th:utext="${contract.description}">...</td>
-            <td th:utext="${contract.format}">...</td>
-            <td th:utext="${contract.url}">...</td>
-            <td th:utext="${contract.title}">...</td>
-            <td th:utext="${contract.documentOf}">...</td>
-            <td th:utext="${contract.datePublished}">...</td>
-            <td th:utext="${contract.documentType}">...</td>
-            <td th:utext="${contract.dateModified}">...</td>
-            <td th:utext="${contract.relatedItem}">...</td>
-            <td th:utext="${contract.id}">...</td>
-        </tr>
-    </table>
-</div>
-
-<br/>
-<h2>Contracts</h2>
-
-<div>
-    <table border="1">
-        <tr>
-            <th>PK</th>
-            <th>Hash</th>
-            <th>Language</th>
-            <th>Description</th>
-            <th>Format</th>
-            <th>Url</th>
-            <th>Title</th>
-            <th>DocumentOf</th>
-            <th>DatePublished</th>
-            <th>DocumentType</th>
-            <th>DateModified</th>
-            <th>RelatedItem</th>
-            <th>Id</th>
-        </tr>
-        <tr th:each ="contract : ${contracts}">
-            <td th:utext="${contract.pk}">...</td>
-            <td th:utext="${contract.hash}">...</td>
-            <td th:utext="${contract.language}">...</td>
-            <td th:utext="${contract.description}">...</td>
-            <td th:utext="${contract.format}">...</td>
-            <td th:utext="${contract.url}">...</td>
-            <td th:utext="${contract.title}">...</td>
-            <td th:utext="${contract.documentOf}">...</td>
-            <td th:utext="${contract.datePublished}">...</td>
-            <td th:utext="${contract.documentType}">...</td>
-            <td th:utext="${contract.dateModified}">...</td>
-            <td th:utext="${contract.relatedItem}">...</td>
-            <td th:utext="${contract.id}">...</td>
-        </tr>
-    </table>
+<div class="content-wrap">
+    <form th:action="@{/create}" th:object="${urlForm}" method="POST">
+        <label for="url">URL</label>
+        <input type="text" id="url" th:field="*{url}"/>
+        <input type="submit" value="ADD"/>
+    </form>
 </div>
 </body>
 </html>

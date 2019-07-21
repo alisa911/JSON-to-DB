@@ -4,10 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plotva.jsondb.domain.Contract;
+import com.plotva.jsondb.form.UrlForm;
 import com.plotva.jsondb.service.ContractService;
-import okhttp3.HttpUrl;
-import org.springframework.http.ResponseEntity;
+
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +23,19 @@ public class ContractController {
         this.contractService = contractService;
     }
 
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String showAddPersonPage(Model model) {
+
+        UrlForm urlForm = new UrlForm();
+        model.addAttribute("urlForm", urlForm);
+
+        return "index";
+    }
+
 
     @PostMapping("/create")
-    public ResponseEntity<?> create (@RequestBody HttpUrl url) throws Exception {
+    public String create(Model model, @ModelAttribute("urlForm") UrlForm urlForm) throws Exception {
+        String url = urlForm.getUrl();
         ObjectMapper mapper = new ObjectMapper();
         OkHtmlController work = new OkHtmlController();
         TypeReference<List<Contract>> typeReference = new TypeReference<>() {
@@ -31,13 +43,13 @@ public class ContractController {
         String response = work.run(url);
         JsonNode rootNode = mapper.readTree(response);
         JsonNode dataNode = rootNode.path("data");
-        List<Contract> contracts = mapper.readValue(dataNode.toString(),typeReference);
+        List<Contract> contracts = mapper.readValue(dataNode.toString(), typeReference);
         contractService.save(contracts);
-        return ResponseEntity.ok().body(contracts);
+        return "index";
     }
 
     @GetMapping("/list")
-    public Iterable<Contract>list(){
+    public Iterable<Contract> list() {
         return contractService.list();
     }
 

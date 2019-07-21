@@ -1,0 +1,46 @@
+h1 {
+    color: darkslateblue;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 250%;
+}
+
+input {
+
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid goldenrod;
+    border-radius: 10px;
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    color: cadetblue;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+input[type = submit] {
+    width: 100px;
+    text-align: center;
+    background-color: goldenrod;
+    color: white;
+    font-weight: bold;
+}
+
+.content-wrap {
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: lavender;
+    border-radius: 10px;
+}
+
+body {
+    background: url(./images/58fa0cd9cb04815b90c232e8.jpg);
+    background-size: 50%;
+}

@@ -9,13 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.plotva</groupId>
-    <artifactId>SpringBootThymeleaf</artifactId>
-    <packaging>war</packaging>
+    <artifactId>JSONtoDB</artifactId>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
-
-    <properties>
-        <java.version>11</java.version>
-    </properties>
+    <name>JSONtoDB</name>
 
     <dependencies>
         <dependency>
@@ -74,6 +71,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

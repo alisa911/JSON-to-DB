@@ -5,6 +5,11 @@ h1 {
     font-size: 250%;
 }
 
+a {
+    text-decoration-line: none;
+}
+
+
 input {
 
     width: 80%;
@@ -33,14 +38,48 @@ input[type = submit] {
     font-weight: bold;
 }
 
+input[type = reset] {
+    width: 100px;
+    text-align: center;
+    background-color: forestgreen;
+    color: white;
+    font-weight: bold;
+}
+
 .content-wrap {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
     background-color: lavender;
     border-radius: 10px;
 }
 
 body {
-    background: url(./images/58fa0cd9cb04815b90c232e8.jpg);
+    color: white;
     background-size: 50%;
+}
+
+table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    color: darkslateblue;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
+
+
+}
+
+table th, table td {
+    padding: 5px;
+
+
+}
+
+
+.successMessage {
+    color: limegreen;
+    text-align: center;
+    font-size: xx-large;
 }

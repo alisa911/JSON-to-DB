@@ -8,10 +8,12 @@ import com.plotva.jsondb.form.UrlForm;
 import com.plotva.jsondb.service.ContractService;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,8 +25,15 @@ public class ContractController {
         this.contractService = contractService;
     }
 
+    private static List<Contract> contracts = new ArrayList<>();
+    @Value("${success.message}")
+    private String successMessage = "Success!";
+    @Value("${error.message}")
+    private String errorMessage = "Error!";
+
+
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String showAddPersonPage(Model model) {
+    public String addUrl(Model model) {
 
         UrlForm urlForm = new UrlForm();
         model.addAttribute("urlForm", urlForm);
@@ -32,8 +41,16 @@ public class ContractController {
         return "index";
     }
 
+    @RequestMapping(value = {"/preview"}, method = RequestMethod.GET)
+    public String preview(Model model) {
 
-    @PostMapping("/create")
+        model.addAttribute("contracts", contracts);
+
+        return "preview";
+    }
+
+
+    @PostMapping("/")
     public String create(Model model, @ModelAttribute("urlForm") UrlForm urlForm) throws Exception {
         String url = urlForm.getUrl();
         ObjectMapper mapper = new ObjectMapper();
@@ -43,8 +60,10 @@ public class ContractController {
         String response = work.run(url);
         JsonNode rootNode = mapper.readTree(response);
         JsonNode dataNode = rootNode.path("data");
-        List<Contract> contracts = mapper.readValue(dataNode.toString(), typeReference);
+        contracts = mapper.readValue(dataNode.toString(), typeReference);
+        preview(model);
         contractService.save(contracts);
+        model.addAttribute("successMessage", successMessage);
         return "index";
     }
 

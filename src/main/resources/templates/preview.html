@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contracts Preview</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>pk</th>
+        <th>hash</th>
+        <th>language</th>
+        <th>description</th>
+        <th>format</th>
+        <th>url</th>
+        <th>title</th>
+        <th>documentOf</th>
+        <th>datePublished</th>
+        <th>documentType</th>
+        <th>dateModified</th>
+        <th>relatedItem</th>
+        <th>id</th>
+    </tr>
+    <tr th:each="contract : ${contracts}">
+        <td th:utext="${contract.pk}">...</td>
+        <td th:utext="${contract.hash}">...</td>
+        <td th:utext="${contract.language}">...</td>
+        <td th:utext="${contract.description}">...</td>
+        <td th:utext="${contract.format}">...</td>
+        <td th:utext="${contract.url}">...</td>
+        <td th:utext="${contract.title}">...</td>
+        <td th:utext="${contract.documentOf}">...</td>
+        <td th:utext="${contract.datePublished}">...</td>
+        <td th:utext="${contract.documentType}">...</td>
+        <td th:utext="${contract.dateModified}">...</td>
+        <td th:utext="${contract.relatedItem}">...</td>
+        <td th:utext="${contract.id}">...</td>
+    </tr>
+</table>
+</body>
+</html>

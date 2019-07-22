@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>JSON-to-DB</title>
+    <link rel="icon" type="image/png" th:href="@{/img/favicon.png}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 
 </head>
 <body>
-<h1>JSON-to-DB</h1>
+<h1><a href="/">JSON-to-DB</a></h1>
 <br/>
 <div class="content-wrap">
-    <form th:action="@{/create}" th:object="${urlForm}" method="POST">
+    <form th:action="@{/}" th:object="${urlForm}" method="POST">
         <label for="url">URL</label>
         <input type="text" id="url" th:field="*{url}"/>
         <input type="submit" value="ADD"/>
+        <input type="reset" value="CLEAN"/>
     </form>
+</div>
+<br/>
+<div class="successMessage" th:if="${successMessage}" th:utext="${successMessage}">
+</div>
+<br/>
+<div th:if="${successMessage}" th:insert="preview.html">
 </div>
 </body>
 </html>

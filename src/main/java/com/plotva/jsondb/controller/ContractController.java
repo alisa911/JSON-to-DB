@@ -55,7 +55,7 @@ public class ContractController {
         String url = urlForm.getUrl();
         ObjectMapper mapper = new ObjectMapper();
         OkHtmlController work = new OkHtmlController();
-        TypeReference<List<Contract>> typeReference = new TypeReference<>() {
+        TypeReference<List<Contract>> typeReference = new TypeReference<List<Contract>>() {
         };
         String response = work.run(url);
         JsonNode rootNode = mapper.readTree(response);

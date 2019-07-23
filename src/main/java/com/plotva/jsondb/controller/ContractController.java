@@ -41,12 +41,12 @@ public class ContractController {
         return "index";
     }
 
-    @RequestMapping(value = {"/preview"}, method = RequestMethod.GET)
-    public String preview(Model model) {
+    @RequestMapping(value = {"/view"}, method = RequestMethod.GET)
+    public String view(Model model) {
 
         model.addAttribute("contracts", contracts);
 
-        return "preview";
+        return "view";
     }
 
 
@@ -61,15 +61,17 @@ public class ContractController {
         JsonNode rootNode = mapper.readTree(response);
         JsonNode dataNode = rootNode.path("data");
         contracts = mapper.readValue(dataNode.toString(), typeReference);
-        preview(model);
+        view(model);
         contractService.save(contracts);
         model.addAttribute("successMessage", successMessage);
         return "index";
     }
 
     @GetMapping("/list")
-    public Iterable<Contract> list() {
-        return contractService.list();
+    public String list(Model model) {
+        contracts = (List<Contract>) contractService.list();
+        view(model);
+        return "view";
     }
 
 }

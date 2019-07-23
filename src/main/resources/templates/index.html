@@ -14,7 +14,7 @@
     <form th:action="@{/}" th:object="${urlForm}" method="POST">
         <label for="url">URL</label>
         <input type="text" id="url" th:field="*{url}"/>
-        <input type="submit" value="ADD"/>
+        <input class="add" type="submit" value="ADD"/>
         <input type="reset" value="CLEAN"/>
     </form>
 </div>
@@ -22,7 +22,13 @@
 <div class="successMessage" th:if="${successMessage}" th:utext="${successMessage}">
 </div>
 <br/>
-<div th:if="${successMessage}" th:insert="preview.html">
+<div th:if="${successMessage}" th:insert="view.html">
+</div>
+<br/>
+<div>
+    <form th:action="@{/list}" th:object="${contracts}" method="GET">
+        <input class="all" type="submit" value="ALL CONTRACTS"   />
+    </form>
 </div>
 </body>
 </html>

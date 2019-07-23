@@ -30,10 +30,18 @@ label {
     font-size: x-large;
 }
 
-input[type = submit] {
+input.add {
     width: 100px;
     text-align: center;
     background-color: goldenrod;
+    color: white;
+    font-weight: bold;
+}
+
+input.all {
+    width: 150px;
+    text-align: center;
+    background-color: darkslateblue;
     color: white;
     font-weight: bold;
 }
@@ -45,6 +53,7 @@ input[type = reset] {
     color: white;
     font-weight: bold;
 }
+
 
 .content-wrap {
     margin-left: 10%;

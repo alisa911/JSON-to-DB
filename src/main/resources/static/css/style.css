@@ -92,3 +92,15 @@ table th, table td {
     text-align: center;
     font-size: xx-large;
 }
+
+.errorMessage {
+    color: crimson;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.emptyMessage {
+    color: goldenrod;
+    text-align: center;
+    font-size: xx-large;
+}

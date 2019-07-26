@@ -9,33 +9,40 @@ import com.plotva.jsondb.repository.ContractRepository;
 import com.plotva.jsondb.service.ContractService;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Controller
 public class ContractController {
-
     private ContractService contractService;
 
     private ContractRepository contractRepository;
 
-    public ContractController(ContractService contractService) {
-        this.contractService = contractService;
-    }
 
     private static List<Contract> contracts = new ArrayList<>();
-    private static List<Contract> existContracts = new ArrayList<>();
+
+
     @Value("Success!")
     private String successMessage = "Success!";
     @Value("Error!")
     private String errorMessage = "Error!";
     @Value("All contracts exist!")
     private String emptyMessage = "All contracts exist!";
+
+    public ContractController(ContractService contractService, ContractRepository contractRepository) {
+        this.contractService = contractService;
+        this.contractRepository = contractRepository;
+    }
 
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
@@ -59,7 +66,7 @@ public class ContractController {
     @PostMapping("/")
     public String create(Model model, @ModelAttribute("urlForm") UrlForm urlForm) throws Exception {
         String url = urlForm.getUrl();
-        if (url.contains("https://lb-api-sandbox.prozorro.gov.ua/api/2.4/contracts/") && url.contains("/documents")) {
+        if (url != null && url.contains("https://lb-api-sandbox.prozorro.gov.ua/api/2.4/contracts/") && url.contains("/documents")) {
             ObjectMapper mapper = new ObjectMapper();
             OkHtmlController work = new OkHtmlController();
             TypeReference<List<Contract>> typeReference = new TypeReference<List<Contract>>() {
@@ -69,13 +76,11 @@ public class ContractController {
             JsonNode dataNode = rootNode.path("data");
             contracts = mapper.readValue(dataNode.toString(), typeReference);
 
-            contracts.forEach(k -> {
-                if (contractRepository.findContractById(k.getId()) != null)
-                    contractRepository.deleteContractById(k.getId());
-                existContracts.add(k);
-            });
-            if (contracts.size() == 0) {
 
+            Predicate<Contract> contractPredicate = c -> contractRepository.findFirstById(c.getId()) != null;
+            contracts.removeIf(contractPredicate);
+
+            if (contracts.isEmpty()) {
                 model.addAttribute("emptyMessage", emptyMessage);
                 return "index";
             } else {

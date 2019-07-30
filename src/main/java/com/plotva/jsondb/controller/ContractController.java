@@ -8,19 +8,16 @@ import com.plotva.jsondb.form.UrlForm;
 import com.plotva.jsondb.repository.ContractRepository;
 import com.plotva.jsondb.service.ContractService;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
 
 @Controller
 public class ContractController {
@@ -28,9 +25,7 @@ public class ContractController {
 
     private ContractRepository contractRepository;
 
-
     private static List<Contract> contracts = new ArrayList<>();
-
 
     @Value("Success!")
     private String successMessage = "Success!";
@@ -43,7 +38,6 @@ public class ContractController {
         this.contractService = contractService;
         this.contractRepository = contractRepository;
     }
-
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String addUrl(Model model) {
@@ -62,7 +56,6 @@ public class ContractController {
         return "view";
     }
 
-
     @PostMapping("/")
     public String create(Model model, @ModelAttribute("urlForm") UrlForm urlForm) throws Exception {
         String url = urlForm.getUrl();
@@ -78,6 +71,7 @@ public class ContractController {
 
 
             Predicate<Contract> contractPredicate = c -> contractRepository.findFirstById(c.getId()) != null;
+
             contracts.removeIf(contractPredicate);
 
             if (contracts.isEmpty()) {

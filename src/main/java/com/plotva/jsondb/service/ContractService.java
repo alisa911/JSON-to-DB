@@ -2,10 +2,7 @@ package com.plotva.jsondb.service;
 
 import com.plotva.jsondb.domain.Contract;
 import com.plotva.jsondb.repository.ContractRepository;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 

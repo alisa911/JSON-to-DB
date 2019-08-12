@@ -1,4 +1,4 @@
-package com.plotva.jsondb.controller;
+package com.plotva.jsondb.service;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -6,8 +6,8 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class OkHtmlController {
-    public OkHtmlController() {
+public class OkHtml {
+    public OkHtml() {
     }
 
     OkHttpClient client = new OkHttpClient();

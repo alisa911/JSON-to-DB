@@ -8,6 +8,7 @@ import com.plotva.jsondb.form.UrlForm;
 import com.plotva.jsondb.repository.ContractRepository;
 import com.plotva.jsondb.service.ContractService;
 
+import com.plotva.jsondb.service.OkHtml;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +62,7 @@ public class ContractController {
         String url = urlForm.getUrl();
         if (url != null && url.contains("https://lb-api-sandbox.prozorro.gov.ua/api/2.4/contracts/") && url.contains("/documents")) {
             ObjectMapper mapper = new ObjectMapper();
-            OkHtmlController work = new OkHtmlController();
+            OkHtml work = new OkHtml();
             TypeReference<List<Contract>> typeReference = new TypeReference<List<Contract>>() {
             };
             String response = work.run(url);

@@ -1,1 +1,1 @@
-Ссылка на приложение https://jsondbconverter.herokuapp.com/
+Url https://jsondbconverter.herokuapp.com/
